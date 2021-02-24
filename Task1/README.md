@@ -7,7 +7,7 @@ This task is for implementing a simple service called TaskManager that will prov
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
-pip install foobar
+pip install 
 ```
 
 ## Usage
