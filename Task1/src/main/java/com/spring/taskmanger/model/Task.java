@@ -8,21 +8,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
+@Table(name = "task")
 public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	@Size(max = 1000)
+	@Column(name = "description")
 	private String description;
+
+	@Column(name = "completed")
 	private boolean completed;
-	@ManyToOne // (fetch = FetchType.LAZY, optional = false) // many tasks are related to one
-				// user
-	@JoinColumn(name = "user_id") // tells the hibernate which column in the task table should be associated to a
-									// particular user
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false) // to declare the foreign key column.
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 
@@ -34,8 +41,6 @@ public class Task {
 		this.id = id;
 	}
 
-
-
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -43,8 +48,7 @@ public class Task {
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
-	
-	
+
 	public User getUser() {
 		return user;
 	}

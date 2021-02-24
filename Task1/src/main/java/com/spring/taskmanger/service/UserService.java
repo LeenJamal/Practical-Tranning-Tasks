@@ -43,7 +43,6 @@ public class UserService {
 		logger.info("User retrived Succefully");
 		return ResponseEntity.ok().body(userOptional.get());
 	}
-	
 
 	public ResponseEntity<?> deleteUser(Long id) {
 

@@ -29,9 +29,9 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler  {
 	//You can further enhance CustomizedResponseEntityExceptionHandler to handle all other exceptions.
 
 	public ResponseEntity<?> handleGlobalException
-	        (Exception resourceNotFoundException, WebRequest request) {
+	        (Exception exception, WebRequest request) {
 		
-		ErrorDetials errorDetials = new ErrorDetials(new Date(), resourceNotFoundException.getMessage(), request.getDescription(false));
+		ErrorDetials errorDetials = new ErrorDetials(new Date(), exception.getMessage(), request.getDescription(false));
 		return new ResponseEntity(errorDetials , HttpStatus.INTERNAL_SERVER_ERROR); 
 		
 	}

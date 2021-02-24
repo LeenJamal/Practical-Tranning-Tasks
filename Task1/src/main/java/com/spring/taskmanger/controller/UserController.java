@@ -2,6 +2,8 @@ package com.spring.taskmanger.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,41 +24,36 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/users")  
+	@GetMapping("/users")
 	public List<User> getAllUsers() {
 
 		return userService.getAllUsers();
 	}
 
 	@GetMapping("/users/{id}")
-	//ResponseEntity represents the whole HTTP response: status code, headers, and body
+	// ResponseEntity represents the whole HTTP response: status code, headers, and
+	// body, Used in RestTemplate as well @Controller methods.
 	public ResponseEntity<User> getUser(@PathVariable Long id) {
-		
+
 		return userService.getUser(id);
 	}
 
 	@PostMapping("/users")
-	public User addUser( @RequestBody User user) {
-
+	public User addUser(@Valid @RequestBody User user) {
 		return userService.addUser(user);
 
 	}
-	
-	@DeleteMapping("/users/{id}")
-	// ResponseEntity : Extension of HttpEntity that adds a HttpStatus status code.Used in RestTemplate as well @Controller methods. 
-	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 
+	@DeleteMapping("/users/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 		return userService.deleteUser(id);
 
 	}
-	
+
 	@PutMapping("/users/{id}")
-	public ResponseEntity<User> UpdateUser(@RequestBody User user,@PathVariable Long id) {
-		 return userService.updateUser(id ,user);
+	public ResponseEntity<User> UpdateUser(@Valid @RequestBody User user, @PathVariable Long id) {
+		return userService.updateUser(id, user);
 
 	}
-	
-	
-	
 
 }

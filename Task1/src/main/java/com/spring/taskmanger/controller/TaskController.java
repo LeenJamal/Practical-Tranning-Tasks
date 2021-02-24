@@ -2,6 +2,8 @@ package com.spring.taskmanger.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,30 +39,27 @@ public class TaskController {
 	}
 
 	@GetMapping("/users/{userId}/tasks/{taskId}")
-	public ResponseEntity<Task> getTask(@PathVariable Long userId , @PathVariable Long taskId ) {
+	public ResponseEntity<Task> getTask(@PathVariable Long userId, @PathVariable Long taskId) {
 		return taskService.getTask(userId, taskId);
 	}
 
 	@PostMapping("/users/{userId}/tasks")
-	public ResponseEntity<Task> addTask(@RequestBody Task task, @PathVariable Long userId) {
+	public ResponseEntity<Task> addTask(@Valid @RequestBody Task task, @PathVariable Long userId) {
 
 		return taskService.addTask(task, userId);
-
 	}
 
 	@PutMapping("/users/{userId}/tasks/{taskid}")
-	public ResponseEntity<Task> updateTask(@RequestBody Task task, @PathVariable Long userId,
+	public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task, @PathVariable Long userId,
 			@PathVariable Long taskid) {
 
 		return taskService.updateTask(task, userId, taskid);
-
 	}
 
 	@DeleteMapping("/users/{userId}/tasks/{taskId}")
 	public ResponseEntity<?> deleteTask(@PathVariable Long userId, @PathVariable Long taskId) {
 
 		return taskService.deleteTask(userId, taskId);
-
 	}
 
 }
